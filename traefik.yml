@@ -1,0 +1,18 @@
+api:
+  insecure: true
+
+log:
+  level: DEBUG
+
+providers:
+  docker:
+    exposeByDefault: false
+    network: traefik
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: ""
+      storage: "/letsencrypt/acme.json"
+      httpChallenge:
+        entryPoint: "web"
