@@ -1,5 +1,6 @@
 api:
   insecure: true
+  dashboard: true
 
 log:
   level: DEBUG
@@ -12,6 +13,12 @@ providers:
 entryPoints:
   web:
     address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: "websecure"
+          scheme: "https"  # Исправлено с "schema" на "scheme"
+
   websecure:
     address: ":443"
 
