@@ -10,7 +10,7 @@ services:
 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./traefik.yml:/traefik.dev.yml:ro
+      - ./traefik.dev.yml:/traefik.yml:ro
       - ./certs:/certs:ro
 
 networks:
