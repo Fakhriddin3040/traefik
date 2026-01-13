@@ -3,7 +3,7 @@ api:
   dashboard: true
 
 log:
-  level: DEBUG
+  level: INFO
 
 providers:
   docker:
