@@ -4,8 +4,9 @@ services:
     container_name: traefik
 
     ports:
-      - "80:80"
-      - "443:443"
+      - "80:80/tcp"
+      - "443:443/tcp"
+      - "443:443/udp"
 
     expose:
       - "8080"
@@ -14,6 +15,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.yml:/traefik.yml:ro
     restart: unless-stopped
+
+    command:
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.websecure.http3"
 
 networks:
   default:
