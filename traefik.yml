@@ -7,14 +7,19 @@ log:
 
 providers:
   docker:
-    # For volumed socket.
-    # endpoint: unix://var/run/docker.sock
     exposedByDefault: false
     network: traefik
- # For kuber
- # kubernetesCRD: {}
- # kubernetesIngress:
-    # ingressClass: traefik
+  file:
+    directory: /etc/traefik/dynamic
+    watch: true
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: "murodjonfaiziev@gmail.com"
+      storage: "/acme.json"
+      httpChallenge:
+        entryPoint: "web"
 
 entryPoints:
   web:
@@ -23,16 +28,8 @@ entryPoints:
       redirections:
         entryPoint:
           to: "websecure"
-          scheme: "https"  # Исправлено с "schema" на "scheme"
+          scheme: "https"
 
   websecure:
     address: ":443"
-    http3: {}
 
-certificatesResolvers:
-  letsencrypt:
-    acme:
-      email: "murodjonfaiziev@gmail.com"
-      storage: "acme.json"
-      httpChallenge:
-        entryPoint: "web"

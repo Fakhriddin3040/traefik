@@ -1,0 +1,22 @@
+# Relay to anbor prod for Russia clients
+tcp:
+  routers:
+    anbor-relay:
+      entryPoints:
+        - websecure
+      rule: "HostSNI(`app.anbor.tj`) || HostSNI(`api.anbor.tj`)"
+      tls:
+        passthrough: true
+      service: anbor-relay
+
+  services:
+    anbor-relay:
+      loadBalancer:
+        serversTransport: anbor-relay-pp
+        servers:
+          - address: "167.233.41.230:8443"
+
+  serversTransports:
+    anbor-relay-pp:
+      proxyProtocol:
+        version: 2
