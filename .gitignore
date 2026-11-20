@@ -1,5 +1,9 @@
 acme*
 .env
-keys*
+keys/
 *.pem
 *.crt
+ssl/
+*.logs
+*.log
+*.out
